@@ -1,0 +1,40 @@
+---
+- name: Start httpd service with systemd
+  systemd:
+      name: httpd
+      state: started
+
+- name: Create www folder
+  file:
+    path: /home/site-web/www
+    state: directory
+
+- name: Copy index.php file into www folder
+  copy:
+    src: index.php
+    dest: /home/site-web/www/index.php
+
+- name: Create sites-available folder
+  file:
+    path: /etc/httpd/sites-available
+    state: directory
+
+- name: Create sites-enabled folder
+  file:
+    path: /etc/httpd/sites-enabled
+    state: directory
+
+- name: Copy site.web.conf file into sites-available folder
+  copy:
+    src: site.web.conf
+    dest: /etc/httpd/sites-available/site.web.conf
+
+- name: Restart httpd
+  systemd:
+      name: httpd
+      state: restarted
+
+- name: bla
+  copy:
+    src: index.php
+    dest: /var/www/html/index.php

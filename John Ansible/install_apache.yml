@@ -1,0 +1,9 @@
+---
+- name: Install apache on new machines
+  hosts: all
+  connection: local
+  become: yes
+  roles:
+    - install_yum_packages
+    - configure_firewall
+    - configure_httpd

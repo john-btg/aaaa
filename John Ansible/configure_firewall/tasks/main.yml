@@ -1,0 +1,17 @@
+---
+- name: Add service http to firewall
+  firewalld:
+    service: http
+    permanent: yes
+    state: enabled
+
+- name: Add service https to firewall
+  firewalld:
+    service: https
+    permanent: yes
+    state: enabled
+
+- name: Restart firewalld with systemd
+  systemd:
+    name: firewalld
+    state: reloaded
